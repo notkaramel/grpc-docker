@@ -1,7 +1,7 @@
-FROM ubuntu:25.04 AS grpc-builder
+FROM ubuntu:16.04 AS grpc-builder
 
 # https://grpc.io/docs/languages/cpp/quickstart/
-ENV CXX_VERSION=23
+ENV CXX_VERSION=11
 ENV CORE_COUNT=7
 ENV MY_INSTALL_DIR=/usr/local
 ENV PATH="$MY_INSTALL_DIR/bin:$PATH"
@@ -12,10 +12,12 @@ RUN apt-get update && \
     apt-get install -y git cmake make build-essential autoconf libtool pkg-config
 
 # Cloning gRPC repo
-RUN git clone --recurse-submodules -b v1.76.0 --depth 1 --shallow-submodules https://github.com/grpc/grpc
+RUN git --version
+RUN git clone -b v1.76.0 --depth 1 https://github.com/grpc/grpc && \
+    cd grpc && \
+    git submodule update --init --recursive --depth 1
 
 WORKDIR /grpc
-ADD install.sh install.sh
 RUN mkdir -p cmake/build
 SHELL ["/bin/bash", "-c"]
 RUN pushd cmake/build && \
