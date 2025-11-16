@@ -27,5 +27,11 @@ RUN pushd cmake/build && \
     make install && \
     popd
 
+RUN apt-get clean && \
+    rm -rf /var/lib/apt/lists/* && \
+    rm -rf /grpc/cmake/build && \
+    rm -rf /root/.cache && \
+    find /usr/local -name '*.a' -delete
+
 
 
