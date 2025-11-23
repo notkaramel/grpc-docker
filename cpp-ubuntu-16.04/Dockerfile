@@ -1,4 +1,4 @@
-FROM ubuntu:20.04 AS grpc-builder
+FROM ubuntu:22.04 AS grpc-builder
 
 # https://grpc.io/docs/languages/cpp/quickstart/
 ENV CXX_VERSION=14

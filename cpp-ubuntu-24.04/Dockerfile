@@ -1,4 +1,4 @@
-FROM ubuntu:25.04 AS grpc-builder
+FROM ubuntu:24.04 AS grpc-builder
 
 # https://grpc.io/docs/languages/cpp/quickstart/
 ENV CXX_VERSION=23
@@ -40,6 +40,8 @@ ENV MY_INSTALL_DIR=/usr/local
 ENV PATH="$MY_INSTALL_DIR/bin:$PATH"
 RUN mkdir -p $MY_INSTALL_DIR
 COPY --from=grpc-builder /usr/local /usr/local
-    
+
 CMD ["/bin/bash"]
+
+
 
