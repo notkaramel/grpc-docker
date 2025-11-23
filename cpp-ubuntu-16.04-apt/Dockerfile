@@ -1,4 +1,4 @@
-FROM ubuntu:25.04
+FROM ubuntu:16.04 AS grpc-runtime
 
 SHELL ["/bin/bash", "-c"]
 # Install cmake and build tools
